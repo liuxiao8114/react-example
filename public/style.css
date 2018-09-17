@@ -1,0 +1,18 @@
+.detail-hint-in {
+  border: 5px solid red;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: all ease 2s;
+  width: 300px;
+  height: 100px;
+  z-index: 100;
+}
+
+.detail-hint-in:hover {
+  border: 5px solid green;
+  background-color: rgba(255, 0, 0, 0.2);
+  right: -300px;
+  transition: all ease 3s;
+}
