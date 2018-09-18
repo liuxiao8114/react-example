@@ -20,21 +20,25 @@ describe('actions', () => {
 
   it('receivePosts when async fetchPosts is done', () => {
     mockFetch.getOnce(
-      `http://www.reddit.com/r/${SELECT_KEY_1}.json`,
-      { body: { items: ['do something'] },
+      `https://api.github.com/search/repositories?q=${SELECT_KEY_1}.json&page=1`,
+      { items: ['react', 'react-redux'] ,
         headers: { 'content-type': 'application/json' }
       }
     )
 
     const expectedActions = [
-      { type: types.REQUEST_POSTS },
-      { type: types.RECEIVE_POSTS, body: { items: ['do something'] } }
+      { type: types.REQUEST_POSTS, subreddit: SELECT_KEY_1 },
+      { type: types.RECEIVE_POSTS, posts: ['react', 'react-redux'], subreddit: SELECT_KEY_1 }
     ]
 
     const store = mockStore({})
 
     return store.dispatch(actions.fetchPosts(SELECT_KEY_1)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions)
+      const actions = store.getActions()
+      expect(actions[0]).toEqual(expectedActions[0])
+      expect(actions[1].type).toEqual(expectedActions[1].type)
+      expect(actions[1].subreddit).toEqual(expectedActions[1].subreddit)
+      expect(actions[1].posts).toEqual(expectedActions[1].posts)
     })
   })
 

@@ -22,32 +22,31 @@ function requestPosts(subreddit) {
 }
 
 function receivePosts(subreddit, json) {
+  console.log(`in json: ${json.items}`)
   return {
     type: types.RECEIVE_POSTS,
     subreddit,
-    posts: json.data.children.map(child => child.data),
+    posts: json.items,
     receivedAt: Date.now()
   }
 }
 
 function shouldFetchPosts(state, subreddit) {
-  const posts = state.postsBySubreddit.items[subreddit]
-  console.log(`posts: ${posts}, subreddit: ${subreddit}`)
-  if(!posts) {
+  const results = state.postsBySubreddit[subreddit]
+  if(!results) {
     return true
-  } else if(posts.isFetching) {
+  } else if(results.isFetching) {
     return false
   } else {
-    return posts.didInvalidate
+    return results.didInvalidate
   }
 }
-
-const API = subreddit => `http://www.reddit.com/r/${subreddit}.json`
 
 export function fetchPosts(subreddit) {
   return dispatch => {
     dispatch(requestPosts(subreddit))
-    return fetch(API(subreddit)).then(
+    return fetch(`https://api.github.com/search/repositories?q=${subreddit}.json&page=1`)
+    .then(
       response => response.json(),
       error => console.log('Error occurred', error) //eslint-disable-line
     ).then(
@@ -59,7 +58,7 @@ export function fetchPosts(subreddit) {
 export function fetchPostsIfNeeded(subreddit) {
   return (dispatch, getState) => {
     if(shouldFetchPosts(getState(), subreddit)) {
-      return fetchPosts(subreddit)
+      return dispatch(fetchPosts(subreddit))
     } else {
       return Promise.resolve()
     }

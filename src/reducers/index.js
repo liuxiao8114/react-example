@@ -5,7 +5,7 @@ import * as types from '../actions/actionTypes'
 const INITIAL_POST_STATE = {
   isFetching: false,
   didInvalidate: false,
-  items: []
+  posts: []
 }
 
 const DEFAULT_SUBREDDIT = 'react'
@@ -41,7 +41,7 @@ function posts(state = INITIAL_POST_STATE, action) {
       return Object.assign({}, state, {
         isFetching: false,
         didInvalidate: false,
-        items: action.posts,
+        posts: action.posts,
         lastUpdated: action.receivedAt
       })
     case types.INVALIDATE_POSTS:

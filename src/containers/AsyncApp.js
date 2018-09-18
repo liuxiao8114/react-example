@@ -41,7 +41,7 @@ class AsyncApp extends React.Component {
         <Picker value={ selectedSubreddit } onChange={ this.handleChange } />
         <p>
           { lastUpdated &&
-            <span> Last updated at { new Date(lastUpdated).toLocalTimeString() } </span>
+            <span> Last updated at { new Date(lastUpdated).toLocaleTimeString() } </span>
           }
           { !isFetching &&
             <button onClick={() => { this.handleRefresh() }}>Refresh</button>
@@ -72,7 +72,7 @@ const mapStateToProps = state => {
   const { isFetching,
           posts,
           lastUpdated
-        } = postsBySubreddit.items[selectedSubreddit] || {
+        } = postsBySubreddit[selectedSubreddit] || {
           isFetching: false,
           posts: []
         }

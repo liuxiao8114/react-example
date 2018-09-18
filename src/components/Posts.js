@@ -7,7 +7,7 @@ export default class Posts extends React.Component {
     if(!posts) throw new Error('posts should not get into Post render when null')
 
     const lists = posts.map((post, i) => {
-      return (<li key={'POSTS_' + i}>{ 'post_content_' + i + ': ' + post }</li>)
+      return (<li key={post.id}>{ `post_content_${i}: name: ${post['full_name']}, description: ${post['description']}` }</li>)
     })
 
     return (
