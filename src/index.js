@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import App from './components/App'
 import Root from './root'
 import Calculator from '../officals/lifting-state-up'
+import PortalMain from '../officals/portals'
 
 ReactDOM.render(
   <div>
@@ -16,6 +17,7 @@ ReactDOM.render(
       <Root/>
     </div>
     <Calculator/>
+    <PortalMain/>
   </div>,
   document.getElementById('app')
 )

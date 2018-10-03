@@ -16,3 +16,16 @@
   right: -300px;
   transition: all ease 3s;
 }
+
+.modal-container {
+  position: relative;
+  z-index: 999;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}

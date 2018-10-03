@@ -62,3 +62,16 @@ export class MouseTracker extends React.Component {
     )
   }
 }
+
+function withComponent(Component) {
+  return class X extends React.Component {
+    render() {
+      return (
+        <div>
+          <h1>Try move the mouse around!</h1>
+          <Mouse render={mouse => (<Component { ...this.props } mouse={mouse}/>)} />
+        </div>
+      )
+    }
+  }
+}

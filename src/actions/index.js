@@ -22,7 +22,6 @@ function requestPosts(subreddit) {
 }
 
 function receivePosts(subreddit, json) {
-  console.log(`in json: ${json.items}`)
   return {
     type: types.RECEIVE_POSTS,
     subreddit,
